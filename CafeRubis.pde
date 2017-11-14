@@ -3,15 +3,17 @@
 
 void setup()
 {
+
  size(800,600); 
  loadData();
  printProducts();
+ border = width/15;
 }
 
 ArrayList<Product> cafes = new ArrayList<Product>();
 ArrayList<Product> bill = new ArrayList<Product>();
 
-float border = width/10;
+float border;
 
 // the method that loads data from the csv file to the array lists
 void loadData()
@@ -29,7 +31,8 @@ void loadData()
 
 void draw()
 {
- background(200, 200, 200); 
+ background(200, 200, 200);
+ drawUI();
  displayProducts();
  
 }
@@ -44,8 +47,32 @@ void printProducts()
   }
 }
 
+void drawUI()
+{
+  textSize(32);
+  textAlign(CENTER);
+  text("Cafe Rubis Till System", width/2, border/2);
+  line(width/2, border, width/2, height - border);
+  fill(255);
+  rect(width/2 + border, border, width/2.5, height - (border*2)); 
+}
+
 void displayProducts()
-{  
-  rect(border, border, width/5, height/10);
-    
+{ 
+  println(border);
+  float buttonBorder = height/8;
+  String nfPrice;
+  textSize(15);
+  for(int i = 0; i < cafes.size(); i++)
+  {
+    Product c = cafes.get(i);
+    fill(255);
+    rect(border, border + (buttonBorder * i), width/3, height/10);
+    textAlign(LEFT);
+    fill(0);
+    text(c.name, border + (border/4), (border + height/20 ) + (buttonBorder * i) );
+    textAlign(RIGHT);
+    nfPrice = nf(c.price, 1, 2);
+    text(nfPrice, border + (border * 4), (border + height/20 ) + (buttonBorder * i) );
+  }
 }

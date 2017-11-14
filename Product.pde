@@ -8,7 +8,5 @@ class Product
  {
    name = row.getString("Name");
    price = row.getFloat("Price");
- }
-  
-  
+ } 
 }
