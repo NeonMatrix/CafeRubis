@@ -7,12 +7,16 @@ void setup()
  loadData();
  printProducts();
  border = width/15;
+ billFull = false;
+ billSize = 14;
 }
 
 ArrayList<Product> cafes = new ArrayList<Product>();
 ArrayList<Product> bill = new ArrayList<Product>();
 
 float border;
+boolean billFull;
+int billSize;
 
 // the method that loads data from the csv file to the array lists
 void loadData()
@@ -49,12 +53,22 @@ void mousePressed()
       if((mouseY > border + (buttonBorder * i) ) && mouseY < (border + (buttonBorder * i) +height/10))
       {
         //ellipse(mouseX, mouseY, 10, 10);
-        bill.add(c);
-        break;
+        if(billFull)
+        {
+          break;
+        }
+        else
+        {
+          bill.add(c);
+          if(bill.size() == 14)
+          {
+           billFull = true; 
+          }
+          break;
+        }
       }
     }
    }
-  
 }
 
 
@@ -93,7 +107,11 @@ void drawUI()
   // the bill box on the left
   fill(255);
   rect(width/2 + border, border, width/2.5, height - (border*2));
+  
   // "Your Bill" on the top of the bill
+  textSize(15);
+  fill(0);
+  text("Your Bill", width/2 + border + ((width/2.5) /2), border + (border/2)); 
 }
 
 // this will draw the boxes on the left, and print the names on the boxes
@@ -138,15 +156,16 @@ void displayBill()
     total += b.price;
     
     textAlign(LEFT);
-    text(b.name, width/2 + border + (border/4), (border + height/20 ) + (billBorder * i) );
+    text(b.name, width/2 + border + (border/4), (border + height/20 ) + (billBorder * i) +  (border/2));
     textAlign(RIGHT);
     nfPrice = nf(b.price, 1, 2);
-    text(b.price, width/2 + border + (border * 5), (border + height/20 ) + (billBorder * i) );
+    text(nfPrice, width/2 + border + (border * 5), (border + height/20 ) + (billBorder * i) + (border/2));
   }
   
   textAlign(LEFT);
-  text("Total" , width/2 + border + (border/4), (border + height/20 ) + (billBorder * i) );
+  text("Total" , width/2 + border + (border/4), (border + height/20 ) + (billBorder * i) + (border/2));
   textAlign(RIGHT);
-  text(total, width/2 + border + (border * 5), (border + height/20 ) + (billBorder * i) );
+  nfPrice = nf(total, 1, 2);
+  text(nfPrice, width/2 + border + (border * 5), (border + height/20 ) + (billBorder * i) + (border/2));
   
 }
