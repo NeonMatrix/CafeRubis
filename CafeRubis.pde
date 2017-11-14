@@ -10,7 +10,7 @@ void setup()
 }
 
 ArrayList<Product> cafes = new ArrayList<Product>();
-ArrayList<Product> bill = new ArrayList<Product>();
+ArrayList<Product> bills = new ArrayList<Product>();
 
 float border;
 
@@ -33,7 +33,30 @@ void draw()
  background(200, 200, 200);
  drawUI();
  displayProducts();
+ //printBills();
 }
+
+void mousePressed()
+{
+   float buttonBorder = height/8;
+   
+   if((mouseX < border +  width/3) && mouseX > border)
+   {
+     for(int i = 0; i < cafes.size(); i++)
+    {
+      Product c = cafes.get(i);
+      if((mouseY > border + (buttonBorder * i) ) && mouseY < (border + (buttonBorder * i) +height/10))
+      {
+        //ellipse(mouseX, mouseY, 10, 10);
+        bills.add(c);
+        break;
+      }
+    }
+   }
+  
+}
+
+
 
 void printProducts()
 {
@@ -44,6 +67,17 @@ void printProducts()
     println(c.name + "  " + c.price);
   }
 }
+
+/*void printBills()
+{
+  // Test to see if data was loaded correctly
+  for(int i = 0; i < bills.size() ; i++)
+  {
+    Product b = bills.get(i);
+    println(b.name + "  " + b.price);
+  }
+}
+*/
 
 // This will draw the shop's header on the top, the line down the middle and the the bill box on the left
 void drawUI()
