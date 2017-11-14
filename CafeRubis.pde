@@ -6,11 +6,12 @@ void setup()
  size(800,600); 
  loadData();
  printProducts();
- 
 }
 
 ArrayList<Product> cafes = new ArrayList<Product>();
 ArrayList<Product> bill = new ArrayList<Product>();
+
+float border = width/10;
 
 // the method that loads data from the csv file to the array lists
 void loadData()
@@ -28,8 +29,8 @@ void loadData()
 
 void draw()
 {
- background(0); 
- 
+ background(200, 200, 200); 
+ displayProducts();
  
 }
 
@@ -44,6 +45,7 @@ void printProducts()
 }
 
 void displayProducts()
-{
-
+{  
+  rect(border, border, width/5, height/10);
+    
 }
